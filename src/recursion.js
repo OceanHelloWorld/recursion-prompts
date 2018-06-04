@@ -80,7 +80,8 @@ var exponent = function(base, exp) {
 	const positive = (exp >= 0); 
 	var count = exp >= 0 ? exp : -exp;
 	if (!positive) {
-		(function () {return count--} ());
+		count--;
+		// (function () {return count--} ());
 		return (exponent(base, -count) / base);
 		 
 	} else {
@@ -88,10 +89,12 @@ var exponent = function(base, exp) {
 			return 1;
 		} else {
 			if (count >= 2) {
-				(function () {return count-=2} ());
+				count -= 2;
+				// (function () {return count-=2} ());
 				return (base * base * exponent(base, count));
 			}
-			(function () {return count--} ());
+			count--;
+			// (function () {return count--} ());
 			return (base * exponent(base, count));
 		}		
 	}
@@ -120,11 +123,27 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
-	
+	if (string === "") {
+        return "";
+    } else {
+        return reverse(string.substr(1)) + string.charAt(0);
+    }
+
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+	string = string.replace(/\s/g, '');
+	string = string.toUpperCase();
+	if (string.length < 2) {
+		return true; 
+	} else {
+		if (string.charAt(0) != string.charAt(string.length - 1)) {
+			return false;
+		} else {
+			return palindrome(string.substr(1, string.length - 2));
+		}
+	}
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
