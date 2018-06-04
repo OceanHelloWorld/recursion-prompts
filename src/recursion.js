@@ -34,7 +34,6 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
-	console.log(n)
 	if (n === 1 || n === -1) return false 
 	else if (n === 0) return true 
 	else if (n >= 2) return isEven(n - 2)
@@ -68,7 +67,6 @@ var range = function(x, y) {
 	        return results;
 	    }
 	    results.push(x - 1);
-
 		return  results.concat(range(x - 1,y));
 	}
 };
@@ -79,6 +77,24 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+	const positive = (exp >= 0); 
+	var count = exp >= 0 ? exp : -exp;
+	if (!positive) {
+		(function () {return count--} ());
+		return (exponent(base, -count) / base);
+		 
+	} else {
+		if (count === 0) {
+			return 1;
+		} else {
+			if (count >= 2) {
+				(function () {return count-=2} ());
+				return (base * base * exponent(base, count));
+			}
+			(function () {return count--} ());
+			return (base * exponent(base, count));
+		}		
+	}
 };
 
 // 8. Determine if a number is a power of two.
@@ -86,10 +102,25 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+	var original;
+	if (n === 1 && original == undefined) {
+		return true;
+	} else if (n === 0 && original == undefined) {
+		return false;
+	}
+	if (n === 0) {
+		return true;
+	} else if (n >= 2) {
+		original = 1;
+		return powerOfTwo(n / 2)
+	} else {
+		return false;
+	}
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+	
 };
 
 // 10. Write a function that determines if a string is a palindrome.
